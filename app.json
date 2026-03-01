@@ -16,7 +16,10 @@
       "supportsTablet": false,
       "bundleIdentifier": "com.nafistiham.jigai",
       "infoPlist": {
-        "UIBackgroundModes": ["fetch", "remote-notification"]
+        "UIBackgroundModes": ["fetch", "remote-notification"],
+        "NSAppTransportSecurity": {
+          "NSAllowsLocalNetworking": true
+        }
       }
     },
     "android": {
