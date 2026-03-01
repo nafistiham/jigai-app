@@ -51,6 +51,7 @@ export function useWebSocket() {
 
   useEffect(() => {
     unmounted.current = false;
+    retryCount.current = 0;
     if (server) connect();
 
     return () => {
