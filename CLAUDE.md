@@ -29,6 +29,9 @@ npm test                   # Jest tests
 - PRs always target `develop`
 - Rebase merge only — no squash, no merge commits
 
+## Commits
+- Never add `Co-Authored-By` or any co-authorship trailer to commit messages
+
 ## Commit convention
 ```
 feat(scope):  new feature
