@@ -14,7 +14,7 @@ describe('scheduleIdleNotification', () => {
   it('schedules notification with tool name in title', async () => {
     await scheduleIdleNotification({
       toolName: 'Claude Code',
-      lastOutput: 'What would you like to do?',
+      notificationBody: 'What would you like to do?',
       workingDir: '~/projects/foo',
       sound: true,
     });
@@ -29,28 +29,26 @@ describe('scheduleIdleNotification', () => {
     );
   });
 
-  it('prefers notificationBody over lastOutput', async () => {
+  it('falls back to workingDir when notificationBody is empty', async () => {
     await scheduleIdleNotification({
-      toolName: 'Claude Code',
-      notificationBody: 'Clean processed line',
-      lastOutput: '___ raw output with underscores ___',
-      workingDir: '~/projects/foo',
+      toolName: 'Aider',
+      notificationBody: '',
+      workingDir: '~/projects/bar',
       sound: true,
     });
 
     expect(Notifications.scheduleNotificationAsync).toHaveBeenCalledWith(
       expect.objectContaining({
         content: expect.objectContaining({
-          body: 'Clean processed line',
+          body: '~/projects/bar',
         }),
       })
     );
   });
 
-  it('falls back to working dir when last output is empty', async () => {
+  it('falls back to workingDir when notificationBody is absent', async () => {
     await scheduleIdleNotification({
       toolName: 'Aider',
-      lastOutput: '',
       workingDir: '~/projects/bar',
       sound: true,
     });

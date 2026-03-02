@@ -29,7 +29,6 @@ TaskManager.defineTask(BACKGROUND_FETCH_TASK, async () => {
       await scheduleIdleNotification({
         toolName: event.tool_name,
         notificationBody: event.notification_body,
-        lastOutput: event.last_output,
         workingDir: event.working_dir,
         sound: soundEnabled,
       });
