@@ -35,8 +35,10 @@ export function InAppBanner({ event, onDismiss }: Props) {
     <Animated.View style={[styles.banner, { transform: [{ translateY }] }]}>
       <TouchableOpacity style={styles.content} onPress={onDismiss} activeOpacity={0.9}>
         <Text style={styles.title}>{event.tool_name} is waiting</Text>
-        {event.last_output ? (
-          <Text style={styles.body} numberOfLines={1}>{event.last_output}</Text>
+        {(event.notification_body || event.last_output) ? (
+          <Text style={styles.body} numberOfLines={1}>
+            {event.notification_body || event.last_output}
+          </Text>
         ) : null}
       </TouchableOpacity>
     </Animated.View>

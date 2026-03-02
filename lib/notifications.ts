@@ -24,13 +24,14 @@ export async function requestNotificationPermissions(): Promise<boolean> {
 
 interface NotificationOptions {
   toolName: string;
-  lastOutput: string;
+  notificationBody?: string; // Pre-processed line from server (preferred)
+  lastOutput: string;        // Raw output (fallback)
   workingDir: string;
   sound: boolean;
 }
 
 export async function scheduleIdleNotification(opts: NotificationOptions): Promise<void> {
-  const body = opts.lastOutput || opts.workingDir || 'Waiting for your input';
+  const body = opts.notificationBody || opts.lastOutput || opts.workingDir || 'Waiting for your input';
 
   await Notifications.scheduleNotificationAsync({
     content: {

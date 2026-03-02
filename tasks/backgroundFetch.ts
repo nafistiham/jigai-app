@@ -28,6 +28,7 @@ TaskManager.defineTask(BACKGROUND_FETCH_TASK, async () => {
     for (const event of newEvents.slice(0, 3)) {
       await scheduleIdleNotification({
         toolName: event.tool_name,
+        notificationBody: event.notification_body,
         lastOutput: event.last_output,
         workingDir: event.working_dir,
         sound: soundEnabled,

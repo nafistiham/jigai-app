@@ -29,6 +29,24 @@ describe('scheduleIdleNotification', () => {
     );
   });
 
+  it('prefers notificationBody over lastOutput', async () => {
+    await scheduleIdleNotification({
+      toolName: 'Claude Code',
+      notificationBody: 'Clean processed line',
+      lastOutput: '___ raw output with underscores ___',
+      workingDir: '~/projects/foo',
+      sound: true,
+    });
+
+    expect(Notifications.scheduleNotificationAsync).toHaveBeenCalledWith(
+      expect.objectContaining({
+        content: expect.objectContaining({
+          body: 'Clean processed line',
+        }),
+      })
+    );
+  });
+
   it('falls back to working dir when last output is empty', async () => {
     await scheduleIdleNotification({
       toolName: 'Aider',

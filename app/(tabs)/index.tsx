@@ -46,6 +46,7 @@ export default function FeedScreen() {
       if (notificationsEnabled) {
         scheduleIdleNotification({
           toolName: newest.tool_name,
+          notificationBody: newest.notification_body,
           lastOutput: newest.last_output,
           workingDir: newest.working_dir,
           sound: soundEnabled,
