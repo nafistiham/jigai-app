@@ -10,6 +10,7 @@ export interface EventResponse {
   tool_name: string;
   working_dir: string;
   last_output: string;
+  notification_body?: string;
   idle_seconds: number;
   detection_method: string;
   timestamp: string;

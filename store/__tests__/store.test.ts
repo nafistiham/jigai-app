@@ -1,4 +1,3 @@
-import { act } from '@testing-library/react-native';
 import { useJigAiStore } from '../index';
 
 // Reset store between tests
@@ -29,49 +28,51 @@ const mockEvent = {
 
 describe('connection slice', () => {
   it('sets status', () => {
-    act(() => useJigAiStore.getState().setStatus('connected'));
+    useJigAiStore.getState().setStatus('connected');
     expect(useJigAiStore.getState().status).toBe('connected');
   });
 
   it('sets server', () => {
     const server = { name: 'MacBook', ip: '192.168.1.5', port: 9384 };
-    act(() => useJigAiStore.getState().setServer(server));
+    useJigAiStore.getState().setServer(server);
     expect(useJigAiStore.getState().server).toEqual(server);
   });
 });
 
 describe('events slice', () => {
   it('adds event to front of list', () => {
-    act(() => useJigAiStore.getState().addEvent(mockEvent));
+    useJigAiStore.getState().addEvent(mockEvent);
     expect(useJigAiStore.getState().events[0]).toEqual(mockEvent);
   });
 
   it('limits events to 50', () => {
-    act(() => {
-      for (let i = 0; i < 60; i++) {
-        useJigAiStore.getState().addEvent({ ...mockEvent, session_id: `id${i}` });
-      }
-    });
+    for (let i = 0; i < 60; i++) {
+      useJigAiStore.getState().addEvent({ ...mockEvent, session_id: `id${i}` });
+    }
     expect(useJigAiStore.getState().events.length).toBe(50);
   });
 
   it('clears events', () => {
-    act(() => {
-      useJigAiStore.getState().addEvent(mockEvent);
-      useJigAiStore.getState().clearEvents();
-    });
+    useJigAiStore.getState().addEvent(mockEvent);
+    useJigAiStore.getState().clearEvents();
     expect(useJigAiStore.getState().events).toHaveLength(0);
+  });
+
+  it('prefers notification_body when present', () => {
+    const eventWithBody = { ...mockEvent, notification_body: 'Clean output line' };
+    useJigAiStore.getState().addEvent(eventWithBody);
+    expect(useJigAiStore.getState().events[0].notification_body).toBe('Clean output line');
   });
 });
 
 describe('settings slice', () => {
   it('toggles autoDiscovery', () => {
-    act(() => useJigAiStore.getState().setAutoDiscovery(false));
+    useJigAiStore.getState().setAutoDiscovery(false);
     expect(useJigAiStore.getState().autoDiscovery).toBe(false);
   });
 
   it('sets manual address', () => {
-    act(() => useJigAiStore.getState().setManualAddress('192.168.1.10:9384'));
+    useJigAiStore.getState().setManualAddress('192.168.1.10:9384');
     expect(useJigAiStore.getState().manualAddress).toBe('192.168.1.10:9384');
   });
 });

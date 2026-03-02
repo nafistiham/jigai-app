@@ -28,8 +28,10 @@ export function EventCard({ event }: Props) {
         </View>
         <Text style={styles.time}>{timeAgo(event.server_time)}</Text>
       </View>
-      {event.last_output ? (
-        <Text style={styles.output} numberOfLines={2}>{event.last_output}</Text>
+      {(event.notification_body || event.last_output) ? (
+        <Text style={styles.output} numberOfLines={2}>
+          {event.notification_body || event.last_output}
+        </Text>
       ) : null}
       <Text style={styles.dir}>{shortenPath(event.working_dir)}</Text>
     </View>

@@ -7,6 +7,7 @@ export interface IdleEvent {
   tool_name: string;
   working_dir: string;
   last_output: string;
+  notification_body?: string; // Pre-processed single line from server (no decorative chars)
   idle_seconds: number;
   detection_method: string;
   timestamp: string;
