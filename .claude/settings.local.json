@@ -1,0 +1,21 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git add:*)",
+      "Bash(git check-ignore:*)",
+      "Bash(cd /Users/md.tihami/Desktop/Learn/Projects/Personal/jigai-app/.worktrees/mobile-app && npx create-expo-app@latest . --template blank-typescript 2>&1)",
+      "Bash(cd:*)",
+      "Bash(npx create-expo-app@latest:*)",
+      "Bash(tail:*)",
+      "Bash(npx expo:*)",
+      "Bash(npm test:*)",
+      "Bash(head:*)",
+      "Bash(cat:*)",
+      "Bash(gh pr:*)",
+      "Bash(git:*)",
+      "Bash(mdfind:*)",
+      "Bash(npm install:*)",
+      "Bash(lsof:*)"
+    ]
+  }
+}
